@@ -1,50 +1,139 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+
 const HomePage = () => {
   return (
     <>
       <section>
         <div className="flex">
-          <div className="w-1/12 border-r p-4  border-indigo-500 h-screen ">
-            <p className=" text-2xl text-center font-bold text-stone-900">
-              My Notes
-            </p>
+          <div className="w-1/12 border-r p-4 text-center border-indigo-500 h-screen ">
+            <p className=" text-2xl font-bold text-stone-900">My Notes</p>
+
+            <FontAwesomeIcon
+              icon={faPlus}
+              size="2x"
+              inverse
+              className="bg-blue-900 rounded-full px-2 py-2"
+            />
           </div>
-          <div className="w-11/12 p-4  bg-orange-200 grid col-auto">
+          <div className="w-11/12 p-4  bg-orange-200">
             <div>
               <p className="text-3xl font-bold text-stone-900">All Notes</p>
             </div>
-            <div className="pt-6">
-              <div className="p-2 border border-stone-950 w-1/6 rounded-xl">
-                <div>
+            <div className="grid grid-cols-5 gap-4 pt-8">
+              <div className="">
+                <div className="p-2 border border-stone-950 rounded-2xl">
                   <div>
-                    <p className="text-xl font-bold text-stone-900">Title</p>
-                    <p className="text-base font-normal text-stone-900 py-2">
-                      Text content area here of all the notes which is availbale
-                      to read write and delete
-                    </p>
+                    <div>
+                      <p className="text-xl font-bold text-stone-900">
+                        Here is the title of notes
+                      </p>
+                      <p className="text-base font-normal text-stone-900 py-2">
+                        Text content area here of all the notes which is
+                        availbale to read write and delete Text content area
+                        here of all the notes which is availbale to read write
+                        and delete
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-xs">7 November 2024</p>
-                  <button>Delete</button>
+                  <div className="flex justify-between">
+                    <p className="text-xs">7 November 2024</p>
+                    <div className="bg-blue-900 px-2  py-1 rounded-full">
+                      <FontAwesomeIcon icon={faPen} inverse />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="pt-6">
-              <div className="p-2 border border-stone-950 w-1/6 rounded-xl">
-                <div>
+              <div className="">
+                <div className="p-2 border border-stone-950 rounded-2xl">
                   <div>
-                    <p className="text-xl font-bold text-stone-900">
-                      This title os 2
-                    </p>
-                    <p className="text-base font-normal text-stone-900 py-2">
-                      Text content area here of all the notes which is availbale
-                      to read write and delete
-                    </p>
+                    <div>
+                      <p className="text-xl font-bold text-stone-900">
+                        Here is the title of notes
+                      </p>
+                      <p className="text-base font-normal text-stone-900 py-2">
+                        Text content area here of all the notes which is
+                        availbale to read write and delete Text content area
+                        here of all the notes which is availbale to read write
+                        and delete
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <p className="text-xs">7 November 2024</p>
+                    <div className="bg-blue-900 px-2  py-1 rounded-full">
+                      <FontAwesomeIcon icon={faPen} inverse />
+                    </div>
                   </div>
                 </div>
-                <div className="flex justify-between">
-                  <p className="text-xs">7 November 2024</p>
-                  <button>Delete</button>
+              </div>
+              <div className="">
+                <div className="p-2 border border-stone-950 rounded-2xl">
+                  <div>
+                    <div>
+                      <p className="text-xl font-bold text-stone-900">
+                        Here is the title of notes
+                      </p>
+                      <p className="text-base font-normal text-stone-900 py-2">
+                        Text content area here of all the notes which is
+                        availbale to read write and delete Text content area
+                        here of all the notes which is availbale to read write
+                        and delete
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <p className="text-xs">7 November 2024</p>
+                    <div className="bg-blue-900 px-2  py-1 rounded-full">
+                      <FontAwesomeIcon icon={faPen} inverse />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="">
+                <div className="p-2 border border-stone-950 rounded-2xl">
+                  <div>
+                    <div>
+                      <p className="text-xl font-bold text-stone-900">
+                        Here is the title of notes
+                      </p>
+                      <p className="text-base font-normal text-stone-900 py-2">
+                        Text content area here of all the notes which is
+                        availbale to read write and delete Text content area
+                        here of all the notes which is availbale to read write
+                        and delete
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <p className="text-xs">7 November 2024</p>
+                    <div className="bg-blue-900 px-2  py-1 rounded-full">
+                      <FontAwesomeIcon icon={faPen} inverse />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="">
+                <div className="p-2 border border-stone-950 rounded-2xl">
+                  <div>
+                    <div>
+                      <p className="text-xl font-bold text-stone-900">
+                        Here is the title of notes
+                      </p>
+                      <p className="text-base font-normal text-stone-900 py-2">
+                        Text content area here of all the notes which is
+                        availbale to read write and delete Text content area
+                        here of all the notes which is availbale to read write
+                        and delete
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <p className="text-xs">7 November 2024</p>
+                    <div className="bg-blue-900 px-2  py-1 rounded-full">
+                      <FontAwesomeIcon icon={faPen} inverse />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
