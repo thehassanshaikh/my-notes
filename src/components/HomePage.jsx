@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import NoteForm from "./NoteForm";
 
 const HomePage = () => {
   return (
@@ -8,13 +9,14 @@ const HomePage = () => {
         <div className="flex">
           <div className="w-1/12 border-r p-4 text-center border-indigo-500 h-screen ">
             <p className=" text-2xl font-bold text-stone-900">My Notes</p>
-
+            <div className="flex items-center justify-center w-16 h-16 bg-blue-900 rounded-full text-white">
             <FontAwesomeIcon
               icon={faPlus}
               size="2x"
               inverse
-              className="bg-blue-900 rounded-full px-2 py-2"
             />
+            </div>
+            
           </div>
           <div className="w-11/12 p-4  bg-orange-200">
             <div>
@@ -140,6 +142,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <NoteForm />
     </>
   );
 };
