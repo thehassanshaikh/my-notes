@@ -1,14 +1,37 @@
-const NoteForm = () => {
+import { useState } from "react";
+
+const NoteForm = ({ onSave }) => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (title.trim() && content.trim()) {
+      const newNote = {
+        title,
+        content,
+        date: new Date().toLocaleDateString(),
+      };
+      onSave(newNote); // Pass the note data to the parent component
+      setTitle(""); // Reset the form
+      setContent("");
+    }
+  };
+
   return (
-    <form className="flex flex-col">
+    <form onSubmit={handleSubmit} className="flex flex-col">
       <input
         type="text"
         placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         className="p-4 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500"
       />
       <textarea
         rows={5}
         placeholder="Take a Note"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         className="p-4 mt-4 border border-gray-300 focus:outline-none focus:border-blue-500"
       />
       <button
