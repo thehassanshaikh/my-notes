@@ -7,7 +7,14 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState([]);
 
-  const colors = ["#fe9b72", "#fec971", "#ae8df3", "#e2ee8e", "#00caf2"];
+  const colors = [
+    "#fe9b72",
+    "#fec971",
+    "#ae8df3",
+    "#e2ee8e",
+    "#00caf2",
+    "#E8BCB9",
+  ];
 
   // Fetch notes from local storage on component mount
   useEffect(() => {
@@ -32,10 +39,10 @@ const HomePage = () => {
     <>
       <section>
         <div className="flex relative h-screen">
-          <div className="w-1/12 border-r p-4 text-center border-grey-200 h-full">
+          <div className="w-1/12 flex flex-col items-center border-r p-4 text-center bg-gray-100 border-grey-200 h-full">
             <p className="text-2xl font-bold text-stone-900">My Notes</p>
             <div
-              className="flex items-center justify-center w-16 h-16 bg-blue-900 rounded-full text-white cursor-pointer"
+              className="flex items-center justify-center mt-8 w-16 h-16 bg-blue-900 rounded-full text-white cursor-pointer"
               onClick={toggleModal}
             >
               <FontAwesomeIcon icon={faPlus} size="2x" inverse />
