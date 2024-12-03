@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import NoteForm from "./NoteForm";
+import "./styles/HomePage.css";
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,6 +36,8 @@ const HomePage = () => {
     toggleModal(); // Close the modal after saving
   };
 
+  console.log(notes);
+
   return (
     <>
       <section>
@@ -52,25 +55,28 @@ const HomePage = () => {
             <div>
               <p className="text-3xl font-bold text-stone-900">All Notes</p>
             </div>
-            <div className="grid grid-cols-5 gap-4 pt-8">
-              {notes.map((note, index) => (
-                <div key={index} className="">
-                  <div
-                    className="p-2 border border-stone-950 rounded-2xl"
-                    style={{
-                      backgroundColor: colors[index % colors.length], // Assign colours cyclically
-                    }}
-                  >
-                    <p className="text-xl font-bold text-stone-900">
-                      {note.title}
-                    </p>
-                    <p className="text-base font-normal text-stone-900 py-2">
-                      {note.content}
-                    </p>
-                    <p className="text-xs text-right">{note.date}</p>
+            <div className="masonry-grid pt-8">
+              {notes
+                .slice()
+                .reverse()
+                .map((note, index) => (
+                  <div key={index} className="">
+                    <div
+                      className="p-2 masonry-item border border-stone-950 rounded-2xl"
+                      style={{
+                        backgroundColor: colors[index % colors.length], // Assign colours cyclically
+                      }}
+                    >
+                      <p className="text-xl font-bold text-stone-900">
+                        {note.title}
+                      </p>
+                      <p className="text-base font-normal text-stone-900 py-2">
+                        {note.content}
+                      </p>
+                      <p className="text-xs text-right">{note.date}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
           {/* Modal */}
