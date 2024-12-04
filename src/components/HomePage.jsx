@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import NoteForm from "./NoteForm";
 import "./styles/HomePage.css";
 
@@ -73,7 +73,17 @@ const HomePage = () => {
                       <p className="text-base font-normal text-stone-900 py-2">
                         {note.content}
                       </p>
-                      <p className="text-xs text-right">{note.date}</p>
+                      <div className="flex justify-between">
+                        <p className="text-xs text-right">{note.date}</p>
+                        <div>
+                          <button className="px-2">
+                            <FontAwesomeIcon icon={faPen} size="xs" />
+                          </button>
+                          <button className="px-2">
+                            <FontAwesomeIcon icon={faTrash} size="xs" />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}
