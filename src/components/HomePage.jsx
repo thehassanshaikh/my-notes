@@ -19,8 +19,16 @@ const HomePage = () => {
 
   // Fetch notes from local storage on component mount
   useEffect(() => {
-    const storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-    setNotes(storedNotes);
+    const storedNotes = localStorage.getItem("notes");
+    if (storedNotes) {
+      try {
+        const parsedNotes = JSON.parse(storedNotes);
+        setNotes(parsedNotes || []);
+      } catch (error) {
+        console.error("Error parsing notes from local storage:", error);
+        setNotes([]); // Fallback to an empty array
+      }
+    }
   }, []);
 
   // Toggle the modal visibility
@@ -36,6 +44,11 @@ const HomePage = () => {
     toggleModal(); // Close the modal after saving
   };
 
+  const handleDelete = (id) => {
+    const filteredNotes = notes.filter((note) => note.id !== id);
+    setNotes(filteredNotes);
+    localStorage.setItem("notes", JSON.stringify(filteredNotes));
+  };
   console.log(notes);
 
   return (
@@ -60,7 +73,7 @@ const HomePage = () => {
                 .slice()
                 .reverse()
                 .map((note, index) => (
-                  <div key={index} className="">
+                  <div key={index} className="group">
                     <div
                       className="p-2 masonry-item border border-stone-950 rounded-2xl"
                       style={{
@@ -73,13 +86,16 @@ const HomePage = () => {
                       <p className="text-base font-normal text-stone-900 py-2">
                         {note.content}
                       </p>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between transition ease-in duration-1000 ">
                         <p className="text-xs text-right">{note.date}</p>
-                        <div>
+                        <div className="hidden group-hover:block ">
                           <button className="px-2">
                             <FontAwesomeIcon icon={faPen} size="xs" />
                           </button>
-                          <button className="px-2">
+                          <button
+                            className="px-2"
+                            onClick={() => handleDelete(note.id)}
+                          >
                             <FontAwesomeIcon icon={faTrash} size="xs" />
                           </button>
                         </div>

@@ -11,6 +11,7 @@ const NoteForm = ({ onSave }) => {
         title,
         content,
         date: new Date().toLocaleDateString(),
+        id: crypto.randomUUID(),
       };
       onSave(newNote); // Pass the note data to the parent component
       setTitle(""); // Reset the form
