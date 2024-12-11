@@ -54,31 +54,6 @@ const HomePage = () => {
     localStorage.setItem("notes", JSON.stringify(filteredNotes));
   };
 
-  const handleEdit = (note) => {
-    setEditNoteId(note.id); // Set the note to be edited
-    setEditTitle(note.title); // Populate the form with the note's current title
-    setEditContent(note.content); // Populate the form with the note's current content
-  };
-
-  const saveEdit = () => {
-    const updatedNotes = notes.map((note) =>
-      note.id === editNoteId
-        ? { ...note, title: editTitle, content: editContent }
-        : note
-    );
-
-    setNotes(updatedNotes);
-    localStorage.setItem("notes", JSON.stringify(updatedNotes));
-    setEditNoteId(null);
-    setEditTitle("");
-    setEditContent("");
-  };
-
-  const cancelEdit = () => {
-    setEditNoteId(null);
-    setEditTitle("");
-    setEditContent("");
-  };
   const startInlineEdit = (id, field, value) => {
     setEditNoteId(id);
     setEditingField(field);
