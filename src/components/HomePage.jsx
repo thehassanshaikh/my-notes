@@ -7,6 +7,10 @@ import "./styles/HomePage.css";
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [editNoteId, setEditNoteId] = useState(null);
+  const [editingField, setEditingField] = useState("");
+  const [editTitle, setEditTitle] = useState("");
+  const [editContent, setEditContent] = useState("");
 
   const colors = [
     "#fe9b72",
@@ -49,6 +53,48 @@ const HomePage = () => {
     setNotes(filteredNotes);
     localStorage.setItem("notes", JSON.stringify(filteredNotes));
   };
+
+  const handleEdit = (note) => {
+    setEditNoteId(note.id); // Set the note to be edited
+    setEditTitle(note.title); // Populate the form with the note's current title
+    setEditContent(note.content); // Populate the form with the note's current content
+  };
+
+  const saveEdit = () => {
+    const updatedNotes = notes.map((note) =>
+      note.id === editNoteId
+        ? { ...note, title: editTitle, content: editContent }
+        : note
+    );
+
+    setNotes(updatedNotes);
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+    setEditNoteId(null);
+    setEditTitle("");
+    setEditContent("");
+  };
+
+  const cancelEdit = () => {
+    setEditNoteId(null);
+    setEditTitle("");
+    setEditContent("");
+  };
+  const startInlineEdit = (id, field, value) => {
+    setEditNoteId(id);
+    setEditingField(field);
+    if (field === "title") setEditTitle(value);
+    if (field === "content") setEditContent(value);
+  };
+
+  const saveInlineEdit = (id, field, value) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === id ? { ...note, [field]: value } : note
+      )
+    );
+    setEditNoteId(null);
+    setEditingField("");
+  };
   console.log(notes);
 
   return (
@@ -72,33 +118,68 @@ const HomePage = () => {
               {notes
                 .slice()
                 .reverse()
-                .map((note, index) => (
-                  <div key={index} className="group">
-                    <div
-                      className="p-2 masonry-item border border-stone-950 rounded-2xl"
-                      style={{
-                        backgroundColor: colors[index % colors.length], // Assign colours cyclically
-                      }}
-                    >
-                      <p className="text-xl font-bold text-stone-900">
+                .map((note) => (
+                  <div
+                    key={note.id}
+                    className="p-4 masonry-item border border-stone-950 rounded-2xl"
+                    style={{
+                      backgroundColor:
+                        colors[Math.floor(Math.random() * colors.length)],
+                    }}
+                  >
+                    {/* Inline Editable Title */}
+                    {editNoteId === note.id && editingField === "title" ? (
+                      <input
+                        className="text-xl font-bold w-full p-2 mb-2 border rounded"
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                        onBlur={() =>
+                          saveInlineEdit(note.id, "title", editTitle)
+                        }
+                        autoFocus
+                      />
+                    ) : (
+                      <p
+                        className="text-xl font-bold text-stone-900 cursor-pointer"
+                        onClick={() =>
+                          startInlineEdit(note.id, "title", note.title)
+                        }
+                      >
                         {note.title}
                       </p>
-                      <p className="text-base font-normal text-stone-900 py-2">
+                    )}
+
+                    {/* Inline Editable Content */}
+                    {editNoteId === note.id && editingField === "content" ? (
+                      <textarea
+                        className="w-full p-2 mb-2 border rounded"
+                        value={editContent}
+                        onChange={(e) => setEditContent(e.target.value)}
+                        onBlur={() =>
+                          saveInlineEdit(note.id, "content", editContent)
+                        }
+                        autoFocus
+                      />
+                    ) : (
+                      <p
+                        className="text-base font-normal text-stone-900 py-2 cursor-pointer"
+                        onClick={() =>
+                          startInlineEdit(note.id, "content", note.content)
+                        }
+                      >
                         {note.content}
                       </p>
-                      <div className="flex justify-between transition ease-in duration-1000 ">
-                        <p className="text-xs text-right">{note.date}</p>
-                        <div className="hidden group-hover:block ">
-                          <button className="px-2">
-                            <FontAwesomeIcon icon={faPen} size="xs" />
-                          </button>
-                          <button
-                            className="px-2"
-                            onClick={() => handleDelete(note.id)}
-                          >
-                            <FontAwesomeIcon icon={faTrash} size="xs" />
-                          </button>
-                        </div>
+                    )}
+
+                    <div className="flex justify-between transition ease-in duration-1000">
+                      <p className="text-xs text-right">{note.date}</p>
+                      <div>
+                        <button
+                          className="px-2"
+                          onClick={() => handleDelete(note.id)}
+                        >
+                          <FontAwesomeIcon icon={faTrash} size="xs" />
+                        </button>
                       </div>
                     </div>
                   </div>
